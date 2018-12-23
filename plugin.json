@@ -1,0 +1,121 @@
+{
+	"name": "Email Endpoints",
+	"version": "1.0.3",
+	"description": "Dependable emails via your own SMTP server or Mandrill.",
+	"demo": "http://koken.me",
+	"author": {
+		"name": "Koken",
+		"link": "http://koken.me"
+	},
+
+	"koken_version_required": "0.21.0-beta.1",
+
+	"data": {
+		"provider": {
+			"type": "select",
+			"header": "Provider",
+			"options": [
+				{"label": "Mandrill", "value": "mandrill"},
+				{"label": "SMTP", "value": "smtp"}
+			],
+			"value": "mandrill"
+		},
+		"mandrill_api_key": {
+			"type": "string",
+			"header": "API key",
+			"info": "Your Mandrill API key. Sign up for Mandrill for free at http://mandrill.com",
+			"validation": {
+				"type": "not_empty",
+				"error_message": "Please enter your Mandrill API key."
+			},
+			"dependencies": {
+				"evaluate": "all",
+				"conditions": [
+					{
+						"option": "provider",
+						"equals": "mandrill"
+					}
+				]
+			}
+		},
+		"mandrill_from_email": {
+			"type": "string",
+			"header": "Verified sender address",
+			"info": "Mandrill requires sending email through a verified domain. Read more at https://mandrillapp.com/settings",
+			"dependencies": {
+				"evaluate": "all",
+				"conditions": [
+					{
+						"option": "provider",
+						"equals": "mandrill"
+					}
+				]
+			}
+		},
+		"smtp_hostname": {
+			"type": "string",
+			"header": "SMTP server",
+			"info": "The hostname of your SMTP server.",
+			"validation": {
+				"type": "url",
+				"error_message": "Please enter your SMTP server name."
+			},
+			"dependencies": {
+				"evaluate": "all",
+				"conditions": [
+					{
+						"option": "provider",
+						"equals": "smtp"
+					}
+				]
+			}
+		},
+		"smtp_port": {
+			"type": "string",
+			"header": "SMTP port",
+			"info": "The port to use when connecting to your SMTP server.",
+			"value": "25",
+			"validation": {
+				"type": "not_empty",
+				"error_message": "Please enter your SMTP server port number."
+			},
+			"dependencies": {
+				"evaluate": "all",
+				"conditions": [
+					{
+						"option": "provider",
+						"equals": "smtp"
+					}
+				]
+			}
+		},
+		"smtp_username": {
+			"type": "string",
+			"header": "SMTP username",
+			"info": "The username to use when connecting to your SMTP server.",
+			"dependencies": {
+				"evaluate": "all",
+				"conditions": [
+					{
+						"option": "provider",
+						"equals": "smtp"
+					}
+				]
+			}
+		},
+		"smtp_password": {
+			"type": "string",
+			"header": "SMTP password",
+			"info": "The password to use when connecting to your SMTP server.",
+			"dependencies": {
+				"evaluate": "all",
+				"conditions": [
+					{
+						"option": "provider",
+						"equals": "smtp"
+					}
+				]
+			}
+		}
+	}
+}
